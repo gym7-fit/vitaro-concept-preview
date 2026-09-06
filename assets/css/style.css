@@ -1,0 +1,720 @@
+:root{
+  --bg:#f7f1e6;
+  --bg-alt:#efe4cf;
+  --card:#fffdf8;
+  --line:rgba(27,21,14,0.12);
+  --text:#1b1712;
+  --text-dim:#6e6357;
+  --accent:#a68a73;
+  --accent-2:#5c4a3a;
+  --accent-rgb:166,138,115;
+  --accent-2-rgb:92,74,58;
+  --bg-rgb:247,241,230;
+  --header-bg:rgba(247,241,230,0.9);
+  --card-shadow:0 10px 30px rgba(40,30,20,0.06);
+  --radius:6px;
+  --focus-ring:#a68a73;
+}
+[data-theme="dark"]{
+  --bg:#1a140f;
+  --bg-alt:#221b14;
+  --card:#241c15;
+  --line:rgba(255,255,255,0.1);
+  --text:#f3ece0;
+  --text-dim:#b5a794;
+  --bg-rgb:26,20,15;
+  --header-bg:rgba(26,20,15,0.88);
+  --card-shadow:none;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:-apple-system,'Avenir Next','Helvetica Neue',Arial,sans-serif;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  transition:background .25s ease, color .25s ease;
+}
+a{color:inherit;text-decoration:none;}
+img{max-width:100%;display:block;}
+.wrap{max-width:1160px;margin:0 auto;padding:0 28px;}
+/* Header specifically needs more room than content sections: logo + 5 nav
+   labels + language/theme/CTA need ~1155px unwrapped, which the shared
+   1160px .wrap leaves almost no margin for (28px padding either side
+   already eats into it). Only matters once the browser window is wider
+   than ~1356px - below that .wrap still just fills the available width,
+   identical to every other section. */
+header .wrap{max-width:1360px;}
+.eyebrow{
+  text-transform:uppercase;
+  letter-spacing:.14em;
+  font-size:.72rem;
+  font-weight:700;
+  color:var(--accent);
+}
+h1,h2,h3{font-family:'Playfair Display',Georgia,'Times New Roman',serif;font-weight:600;letter-spacing:-0.01em;}
+h1{font-size:clamp(2.4rem,5.4vw,4.1rem);line-height:1.1;}
+h2{font-size:clamp(1.9rem,3.4vw,2.7rem);line-height:1.16;}
+h3{font-size:1.2rem;}
+p{color:var(--text-dim);font-size:1.02rem;}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:14px 28px;border-radius:2px;
+  font-weight:600;font-size:.9rem;letter-spacing:.03em;
+  border:1px solid transparent;
+  cursor:pointer;transition:transform .15s ease, opacity .15s ease;
+}
+.btn{text-transform:uppercase;}
+.btn:hover{transform:none;}
+.btn-primary{background:var(--text);color:var(--bg);border-color:var(--text);transition:background .35s ease, color .35s ease;}
+.btn-primary:hover{background:transparent;color:var(--text);}
+.btn-ghost{background:transparent;color:var(--text);border-color:var(--line);}
+.btn-ghost:hover{border-color:var(--text);}
+
+/* ACCESSIBILITY */
+.skip-link{
+  position:absolute;left:12px;top:-60px;z-index:200;
+  background:var(--accent);color:#1b1712;
+  padding:10px 18px;border-radius:4px;font-weight:700;font-size:.9rem;
+  transition:top .15s ease;
+}
+.skip-link:focus{top:12px;}
+a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible,textarea:focus-visible{
+  outline:2px solid var(--focus-ring);outline-offset:3px;border-radius:4px;
+}
+
+/* NAV */
+header{
+  position:sticky;top:0;z-index:50;
+  background:var(--header-bg);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+  transition:background .5s ease, border-color .5s ease, backdrop-filter .5s ease;
+}
+/* Homepage on mobile: header is always a solid bar (fully opaque theme
+   color, no blur/glass) - the hero image fades into it at the top instead
+   (see .hero-bg::before), mirroring the fade into the text background at
+   the bottom (.hero-bg::after). */
+@media (max-width:860px){
+  body.home header{background:var(--bg);border-bottom-color:transparent;backdrop-filter:none;}
+  body.home nav{padding:18px 0;}
+}
+nav{display:flex;align-items:center;justify-content:space-between;padding:26px 0;flex-wrap:wrap;position:relative;}
+.logo{font-family:'Playfair Display',Georgia,serif;font-size:1.4rem;font-weight:500;letter-spacing:.28em;text-transform:uppercase;}
+.nav-panel{display:flex;align-items:center;gap:40px;}
+.nav-links{display:flex;gap:30px;font-size:.78rem;font-weight:600;color:var(--text);text-transform:uppercase;letter-spacing:.08em;}
+.nav-cta{display:flex;align-items:center;gap:14px;}
+
+/* Desktop: logo left, nav links right next to it, utilities pushed to the
+   far right. The underline-on-hover treatment is scoped here too, since
+   the dropdown's arrow glyph below (max-width:1220px block) already
+   redefines .nav-links a::after — redefining it unscoped would merge
+   both declarations into one broken element. This breakpoint (1220px,
+   not the site's usual 860px) is nav-specific: 5 labels + logo + CTA
+   need ~1155px unwrapped, which needs a ~1220px viewport once padding
+   is subtracted - measured directly, not guessed (see header .wrap
+   override above for the matching wide-screen adjustment). */
+@media (min-width:1221px){
+  nav{display:flex;align-items:center;justify-content:flex-start;flex-wrap:wrap;row-gap:14px;}
+  .logo{margin-right:56px;}
+  /* Real nested flexbox instead of display:contents - contents-flattened
+     children have inconsistent align-items handling across browsers
+     (Chrome/Safari can vertically misalign them relative to normal flex
+     items like .logo, even though headless Chromium renders it fine). */
+  .nav-panel{display:flex;align-items:center;flex:1;}
+  /* Without flex-shrink:0, nav-panel's two children default to shrinking
+     to fit its flex:1 width - since "Personal Training"/"Warum VITARO"
+     are the longest labels, they absorb most of that shrink and wrap
+     onto two lines even though there's visible room. Neither should ever
+     shrink; they should keep their natural single-line width. */
+  .nav-links{flex-shrink:0;}
+  .nav-cta{flex-shrink:0;margin-left:auto;}
+  .nav-links a{position:relative;padding-bottom:3px;white-space:nowrap;}
+  .nav-cta .btn{white-space:nowrap;}
+  .nav-links a::after{
+    content:"";position:absolute;left:0;right:100%;bottom:0;height:1px;
+    background:currentColor;transition:right .25s ease;
+  }
+  .nav-links a:hover::after,.nav-links a.active::after{right:0;}
+}
+
+/* THEME TOGGLE */
+.theme-toggle{
+  width:24px;height:24px;border-radius:0;
+  border:none;background:transparent;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;font-size:.95rem;color:var(--text);
+  transition:opacity .15s ease;
+  flex:0 0 auto;
+}
+.theme-toggle:hover{opacity:.6;}
+.theme-toggle .icon-light{display:none;}
+[data-theme="light"] .theme-toggle .icon-dark{display:none;}
+[data-theme="light"] .theme-toggle .icon-light{display:inline;}
+
+/* LANGUAGE SWITCH */
+.lang-select{
+  appearance:none;-webkit-appearance:none;-moz-appearance:none;
+  background-color:transparent;
+  border:none;border-left:1px solid var(--line);
+  color:var(--text);
+  font-size:.78rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+  padding:4px 20px 4px 14px;
+  border-radius:0;
+  cursor:pointer;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238a7d6c' stroke-width='2'><path d='M6 9l6 6 6-6'/></svg>");
+  background-repeat:no-repeat;
+  background-position:right 2px center;
+  background-size:11px;
+  transition:opacity .15s ease;
+  flex:0 0 auto;
+}
+.lang-select:hover{opacity:.6;}
+.lang-select option{background:var(--bg-alt);color:var(--text);}
+
+/* MOBILE MENU BUTTON */
+.menu-toggle{
+  display:none;
+  flex-direction:column;justify-content:center;align-items:center;gap:6px;
+  width:38px;height:38px;
+  background:transparent;border:none;border-radius:0;
+  cursor:pointer;flex:0 0 auto;
+}
+.menu-toggle span{display:block;width:22px;height:1px;background:var(--text);border-radius:0;transition:transform .2s ease, opacity .2s ease;}
+.menu-toggle.active span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.menu-toggle.active span:nth-child(2){opacity:0;}
+.menu-toggle.active span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+/* HERO */
+.hero{
+  position:relative;
+  overflow:hidden;
+  padding:120px 0 70px;
+  background:
+    radial-gradient(ellipse 70% 60% at 80% -10%, rgba(var(--accent-rgb),0.22), transparent 60%),
+    radial-gradient(ellipse 60% 50% at 0% 100%, rgba(var(--accent-2-rgb),0.14), transparent 60%);
+}
+.hero.hero-sm{padding:86px 0 64px;}
+.hero-bg{position:absolute;inset:0;z-index:0;overflow:hidden;}
+/* Crossfade slideshow: 6 stacked layers, one .active at a time, opacity
+   transition handled here, cycling handled by main.js (HERO SLIDESHOW). */
+.hero-bg-slide{
+  position:absolute;inset:0;
+  background-size:cover;
+  background-position:center 30%;
+  opacity:0;
+  transition:opacity 2.4s ease-in-out;
+  /* Keeps this on its own GPU layer permanently, not just while the
+     opacity transition is actively running. Without this, the browser
+     promotes/demotes the layer at the start/end of each crossfade, and
+     re-merging it back into the normal paint order at the end leaves a
+     1px rounding seam right at the fade overlay's edge - only visible
+     once a slide has fully settled, gone the moment the next transition
+     starts again. */
+  will-change:opacity;
+  transform:translateZ(0);
+}
+.hero-bg-slide.active{opacity:1;}
+/* Same image set on mobile and desktop now - no more separate portrait
+   crops, per request. */
+.hero-bg-slide:nth-child(1){
+  background-image:url('../media/vitaro-hero-desktop.jpg');
+  background-position:center 55%;
+}
+.hero-bg-slide:nth-child(2){background-image:url('../media/vitaro-gym-2-desktop.jpg');}
+.hero-bg-slide:nth-child(3){background-image:url('../media/vitaro-gym-3-desktop.jpg');}
+.hero-bg-slide:nth-child(4){background-image:url('../media/vitaro-gym-4-desktop.jpg');}
+.hero-bg-slide:nth-child(5){background-image:url('../media/vitaro-gym-5-desktop.jpg');}
+.hero-bg-slide:nth-child(6){background-image:url('../media/vitaro-gym-6-desktop.jpg');}
+@media (prefers-reduced-motion: reduce){
+  .hero-bg-slide{transition:none;}
+}
+.hero-overlay{
+  position:absolute;inset:0;z-index:1;
+  background:
+    linear-gradient(100deg, var(--bg) 0%, rgba(var(--bg-rgb),0.93) 28%, rgba(var(--bg-rgb),0.55) 56%, rgba(var(--bg-rgb),0.2) 100%),
+    linear-gradient(0deg, var(--bg) 0%, transparent 22%);
+}
+.hero-inner{position:relative;z-index:2;}
+.hero-content{max-width:640px;margin:0;text-align:left;}
+.hero-content .lead{max-width:520px;margin:22px 0 34px;font-size:1.15rem;}
+@media (max-width:860px){
+  /* Inner pages (.hero-sm) have no hero-bg/overlay markup at all, so this
+     only ever affects the homepage hero. Mobile shows the same 6 photos as
+     desktop, as a normal (non-overlaid) banner at the top of the hero:
+     the image renders at its own height (uncropped, via aspect-ratio +
+     background-size:contain), a gradient fades its bottom edge into the
+     page background, and the text starts right after that in normal flow -
+     no more scroll-tied reveal/delay, since that trick only made sense for
+     one specific pool photo, not a mixed cardio/weights/reception series. */
+  /* Kill the decorative accent-tinted radial-gradient background here - it
+     was tuned for the old compact photo-overlay hero. Now that .hero spans
+     the image plus all the flowing text below it, that tint bleeds behind
+     the text section and creates a visible seam right where the fade
+     gradient (which targets flat var(--bg)) meets it. Flat var(--bg) for
+     the whole section removes the mismatch. */
+  body.home .hero:not(.hero-sm){margin-top:0;padding-top:0;background:var(--bg);}
+  .hero:not(.hero-sm) .hero-bg{
+    position:relative;inset:auto;z-index:auto;overflow:hidden;
+    aspect-ratio:3/2;
+    display:block;
+  }
+  /* cover, not contain: none of the 6 photos share an exact aspect ratio
+     with this 3:2 box (closest is off by ~0.6%), so contain always left a
+     sub-pixel gap on some edge - invisible for a couple of them, but a
+     visible 1px background-color line on the sides for images 2-4, and a
+     real gap breaking the top/bottom fade for the much-wider 5/6. cover
+     guarantees the image always fills the box exactly, so the fades
+     always blend against real photo pixels. The crop this adds is minor
+     (a percent or two off the sides/top for the closest-matching photos). */
+  .hero:not(.hero-sm) .hero-bg-slide{
+    background-size:cover;
+    background-repeat:no-repeat;
+    background-position:center;
+    /* Every one of the 6 photos ends up height-constrained by cover in
+       this 3:2 box (closest match still isn't exact), so there's ~zero
+       vertical slack for background-position to redistribute - it was a
+       no-op. scale+translateY actually works: it zooms in, then shifts
+       the whole (now larger than the box) image up, revealing more of
+       what cover cropped from the bottom and hiding more of the top -
+       moving the subject up into the space between the header and where
+       the bottom fade starts, instead of sitting too high with empty
+       photo up top. */
+    transform:scale(1.12) translateY(-5%);
+  }
+  /* No fade at the top: the header is UI chrome, not content, so a clean
+     hard edge against the photo reads as intentional - a soft blend there
+     looked more like a rendering glitch than a design choice. The bottom
+     fade stays, since that's photo blending into content (text), where a
+     soft transition actually earns its place. Needs z-index above the
+     slide layers, since ::after would otherwise stack behind real DOM
+     children (the 6 .hero-bg-slide divs). */
+  .hero:not(.hero-sm) .hero-bg::after{
+    content:"";
+    position:absolute;left:0;right:0;bottom:0;height:25%;z-index:1;
+    background:linear-gradient(to bottom, transparent, var(--bg));
+    pointer-events:none;
+    transform:translateZ(0);
+  }
+  .hero:not(.hero-sm) .hero-overlay{display:none;}
+  .hero:not(.hero-sm) .hero-content{margin-top:18px;}
+}
+.hero-actions{display:flex;gap:16px;flex-wrap:wrap;}
+/* A concrete, sourced business number right in the hero - not a fabricated
+   "trusted by" logo strip (no real hotel partners yet to name), but the
+   one fact a hotel decision-maker actually cares about: guest retention.
+   Gives the hero a B2B hook instead of pure lifestyle imagery. */
+.hero-proof{
+  margin-top:22px;font-size:.88rem;color:var(--text-dim);
+  padding-top:16px;border-top:1px solid var(--line);
+  max-width:420px;
+}
+.hero-proof strong{color:var(--text);font-weight:900;font-size:1.15rem;margin-right:6px;}
+/* Stats live in their own band below the hero photo, on the normal page
+   background — not overlaid on the fading image, where legibility depended
+   on exactly where the gradient happened to end. Matches how aspria.com
+   separates its hero image (short, minimal text) from content blocks. */
+.hero-stats-band{background:var(--bg-alt);border-bottom:1px solid var(--line);position:relative;z-index:3;padding:36px 0;}
+.hero-stats{display:flex;gap:36px;flex-wrap:wrap;}
+.stat b{display:block;font-size:1.8rem;font-weight:900;color:var(--text);}
+.stat span{font-size:.82rem;color:var(--text-dim);}
+
+/* PROOF STRIP */
+.proof-strip{border-bottom:1px solid var(--line);background:var(--bg-alt);position:relative;z-index:3;}
+.proof-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 0;flex-wrap:wrap;font-size:.88rem;}
+.proof-inner .p-text{color:var(--text);font-weight:600;}
+.proof-inner a{color:var(--accent);font-weight:700;white-space:nowrap;}
+.proof-inner a:hover{text-decoration:underline;}
+
+/* SECTION GENERIC */
+section{padding:100px 0;border-bottom:1px solid var(--line);}
+section.section-tight{padding:70px 0;}
+.section-head{max-width:640px;margin-bottom:56px;}
+.section-head.center{max-width:680px;margin-left:auto;margin-right:auto;text-align:center;}
+.section-head .eyebrow{margin-bottom:14px;display:block;}
+.section-head p{margin-top:16px;font-size:1.05rem;}
+
+/* SOURCE NOTES */
+.source-note{font-size:.74rem;color:var(--text-dim);opacity:.75;margin-top:8px;display:block;}
+
+/* PROBLEM */
+.problem-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+.problem-grid.cols-2{grid-template-columns:repeat(2,1fr);}
+.problem-card{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  padding:30px;box-shadow:var(--card-shadow);
+}
+.problem-card b{font-size:2.2rem;display:block;color:var(--accent);margin-bottom:10px;}
+.problem-card p{font-size:.94rem;}
+
+/* SOLUTION STEPS */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;}
+.step{
+  background:var(--bg-alt);border:1px solid var(--line);border-radius:var(--radius);
+  padding:32px 28px;position:relative;box-shadow:var(--card-shadow);
+}
+.step .num{
+  width:38px;height:38px;border-radius:10px;
+  background:rgba(var(--accent-rgb),0.15);color:var(--accent);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:800;margin-bottom:22px;
+}
+.step h3{margin-bottom:10px;}
+.step p{font-size:.94rem;}
+
+/* PROCESS TIMELINE */
+.process-list{list-style:none;display:flex;flex-direction:column;gap:0;counter-reset:process;}
+.process-item{
+  display:grid;grid-template-columns:60px 1fr;gap:24px;padding:28px 0;
+  border-bottom:1px solid var(--line);
+}
+.process-item:last-child{border-bottom:none;}
+.process-item .num{
+  counter-increment:process;
+  width:44px;height:44px;border-radius:50%;
+  background:rgba(var(--accent-rgb),0.12);color:var(--accent);
+  display:flex;align-items:center;justify-content:center;font-weight:800;
+}
+.process-item h3{margin-bottom:6px;}
+.process-item p{font-size:.95rem;}
+
+/* FAQ */
+.faq-list{display:flex;flex-direction:column;gap:12px;}
+.faq-item{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  overflow:hidden;
+}
+.faq-item summary{
+  padding:22px 26px;cursor:pointer;font-weight:700;color:var(--text);
+  list-style:none;display:flex;align-items:center;justify-content:space-between;gap:16px;
+}
+.faq-item summary::-webkit-details-marker{display:none;}
+.faq-item summary::after{
+  content:"+";font-size:1.4rem;font-weight:400;color:var(--accent);flex:0 0 auto;
+  transition:transform .2s ease;
+}
+.faq-item[open] summary::after{transform:rotate(45deg);}
+.faq-item .faq-a{padding:0 26px 24px;font-size:.94rem;color:var(--text-dim);}
+
+/* TRAINER SPLIT */
+.split{display:grid;grid-template-columns:0.9fr 1.1fr;gap:64px;align-items:center;}
+.split-visual{
+  aspect-ratio:1/1;border-radius:22px;
+  background-color:var(--bg);
+  background-image:url('../media/vitaro-trainer.jpg');
+  background-size:110%;
+  background-position:center 20%;
+  box-shadow:var(--card-shadow);
+  position:relative;
+  overflow:hidden;
+  display:flex;align-items:flex-end;justify-content:center;
+  padding:22px;
+}
+.split-visual::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(0deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.1) 42%, transparent 68%);
+}
+.split-visual .caption{
+  position:relative;z-index:1;
+  font-size:.85rem;font-weight:600;color:#fff;
+  background:rgba(0,0,0,0.35);
+  padding:10px 18px;border-radius:999px;
+  backdrop-filter:blur(4px);
+  text-align:center;
+}
+.checklist{list-style:none;margin-top:26px;display:flex;flex-direction:column;gap:14px;}
+.checklist li{display:flex;gap:12px;font-size:.98rem;color:var(--text);}
+.checklist li::before{
+  content:"";flex:0 0 8px;height:8px;margin-top:8px;border-radius:2px;
+  background:var(--accent-2);
+}
+
+/* FOUNDER */
+.founder-block{
+  display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:flex-start;
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  padding:36px;box-shadow:var(--card-shadow);
+}
+.founder-avatar{
+  width:64px;height:64px;border-radius:50%;flex:0 0 auto;
+  background:linear-gradient(150deg, rgba(var(--accent-rgb),0.9), rgba(var(--accent-2-rgb),0.9));
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Playfair Display',Georgia,serif;font-weight:600;font-size:1.4rem;color:#fffdf8;
+}
+.founder-name{font-family:'Playfair Display',Georgia,serif;font-weight:600;color:var(--text);margin-top:16px;}
+.founder-role{font-size:.85rem;color:var(--text-dim);}
+
+/* PARTNERSHIP MODELS */
+.models-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin:32px 0 48px;}
+.model-card{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  padding:26px;box-shadow:var(--card-shadow);
+}
+.model-card h3{font-size:1.02rem;margin-bottom:10px;color:var(--accent);}
+.model-card p{font-size:.9rem;}
+.models-title{font-weight:800;font-size:1.1rem;color:var(--text);margin-bottom:4px;}
+
+/* FOR HOTELS / CTA */
+.partner-band{
+  background:linear-gradient(135deg, rgba(var(--accent-rgb),0.1), rgba(var(--accent-2-rgb),0.08));
+  border-radius:24px;border:1px solid var(--line);
+  padding:64px;display:grid;grid-template-columns:1.15fr 0.85fr;gap:40px;align-items:start;
+}
+.partner-band ul{list-style:none;margin-top:20px;display:flex;flex-direction:column;gap:12px;}
+.partner-band li{font-size:.95rem;color:var(--text-dim);padding-left:20px;position:relative;}
+.partner-band li::before{content:"→";position:absolute;left:0;color:var(--accent);font-weight:700;}
+.map-card{
+  background:var(--card);border:1px solid var(--line);border-radius:16px;
+  overflow:hidden;box-shadow:var(--card-shadow);margin-bottom:20px;
+}
+.map-card iframe{width:100%;height:150px;border:0;display:block;}
+[data-theme="dark"] .map-card iframe{filter:invert(94%) hue-rotate(180deg) brightness(0.92) contrast(0.9) saturate(1.1);}
+.map-card .map-label{padding:14px 18px;font-size:.82rem;font-weight:700;color:var(--text);}
+.partner-card{
+  background:var(--card);border:1px solid var(--line);border-radius:16px;padding:32px;
+  box-shadow:var(--card-shadow);
+}
+.partner-card h3{margin-bottom:12px;}
+.partner-card p{font-size:.92rem;margin-bottom:26px;}
+
+/* MAP CONSENT (two-click) */
+.map-consent{
+  background:var(--card);border:1px solid var(--line);border-radius:16px;
+  overflow:hidden;box-shadow:var(--card-shadow);margin-bottom:20px;
+}
+.map-consent-placeholder{
+  padding:36px 22px;text-align:center;
+}
+.map-consent-placeholder p{font-size:.85rem;margin-bottom:16px;}
+.map-consent iframe{width:100%;height:150px;border:0;display:block;}
+
+/* FORM */
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.form-field{display:flex;flex-direction:column;gap:8px;margin-bottom:20px;}
+.form-field.full{grid-column:1 / -1;}
+.form-field label{font-size:.85rem;font-weight:700;color:var(--text);}
+.form-field .hint{font-size:.78rem;color:var(--text-dim);font-weight:400;}
+.form-field input,.form-field select,.form-field textarea{
+  background:var(--bg-alt);border:1px solid var(--line);border-radius:10px;
+  padding:13px 16px;color:var(--text);font-family:inherit;font-size:.95rem;
+  transition:border-color .15s ease;
+}
+.form-field input:focus,.form-field select:focus,.form-field textarea:focus{border-color:var(--accent);outline:none;}
+.form-field textarea{resize:vertical;min-height:120px;}
+.form-consent{display:flex;gap:12px;align-items:flex-start;font-size:.85rem;color:var(--text-dim);margin-bottom:24px;}
+.form-consent input{margin-top:4px;flex:0 0 auto;}
+.form-consent a{color:var(--accent);text-decoration:underline;}
+.hp-field{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;}
+.form-note{font-size:.82rem;color:var(--text-dim);margin-top:16px;}
+.form-success{
+  background:rgba(var(--accent-rgb),0.1);border:1px solid var(--line);border-radius:var(--radius);
+  padding:40px;text-align:center;
+}
+@media (max-width:700px){.form-grid{grid-template-columns:1fr;}}
+
+/* CONTACT CHANNELS */
+.contact-channels{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:56px;}
+.channel-card{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  padding:28px;box-shadow:var(--card-shadow);
+}
+.channel-card h3{margin-bottom:8px;}
+.channel-card p{font-size:.9rem;margin-bottom:18px;}
+@media (max-width:700px){.contact-channels{grid-template-columns:1fr;}}
+
+/* LEGAL PAGES */
+.legal-content{max-width:760px;}
+.legal-content h2{font-size:1.4rem;margin:40px 0 14px;}
+.legal-content h2:first-child{margin-top:0;}
+.legal-content h3{font-size:1.05rem;margin:24px 0 10px;color:var(--text);}
+.legal-content p{margin-bottom:14px;}
+.legal-content ul{margin:0 0 14px 22px;color:var(--text-dim);font-size:1.02rem;}
+.legal-content li{margin-bottom:6px;}
+.legal-placeholder{
+  background:rgba(var(--accent-rgb),0.1);border:1px dashed var(--accent);border-radius:8px;
+  padding:2px 8px;color:var(--text);font-weight:700;font-style:normal;
+}
+.legal-updated{font-size:.82rem;color:var(--text-dim);margin-bottom:40px;}
+
+/* CONSENT BANNER */
+.consent-banner{
+  position:fixed;left:0;right:0;bottom:0;z-index:100;
+  background:var(--card);border-top:1px solid var(--line);
+  padding:18px 0 calc(18px + env(safe-area-inset-bottom));
+  box-shadow:0 -8px 30px rgba(0,0,0,0.2);
+  transform:translateY(110%);transition:transform .3s ease;
+}
+.consent-banner.visible{transform:translateY(0);}
+.consent-inner{
+  display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;
+}
+.consent-inner p{font-size:.85rem;flex:1 1 320px;min-width:0;margin:0;}
+.consent-inner a{color:var(--accent);text-decoration:underline;}
+.consent-actions{display:flex;gap:12px;flex:0 0 auto;}
+
+/* 404 */
+.error-page{padding:160px 0;text-align:center;}
+.error-page .code{font-size:5rem;font-weight:900;color:var(--accent);line-height:1;}
+
+/* FOOTER / CONTACT */
+footer{padding:80px 0 40px;}
+.footer-top{display:grid;grid-template-columns:1.2fr 0.8fr 0.8fr;gap:50px;margin-bottom:60px;}
+.footer-top h2{max-width:420px;margin-bottom:24px;}
+.footer-col h4{font-size:.75rem;text-transform:uppercase;letter-spacing:.1em;color:var(--text-dim);margin-bottom:18px;}
+.footer-col a{
+  display:block;position:relative;width:fit-content;
+  font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;
+  color:var(--text);margin-bottom:14px;padding-bottom:2px;
+}
+.footer-col a::after{
+  content:"";position:absolute;left:0;right:100%;bottom:0;height:1px;
+  background:currentColor;transition:right .25s ease;
+}
+.footer-col a:hover::after{right:0;}
+.footer-bottom{
+  border-top:1px solid var(--line);padding-top:26px;
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;
+  font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;color:var(--text-dim);
+}
+.footer-legal{display:flex;gap:18px;flex-wrap:wrap;}
+.footer-legal a{color:var(--text-dim);}
+.footer-legal a:hover{color:var(--text);}
+
+/* Nav gets its own, wider breakpoint (1010px) than the rest of the site
+   (860px): with 5 nav labels + logo + language/theme/CTA, the horizontal
+   desktop nav needs ~980px to fit on one line without either wrapping
+   words mid-phrase or overflowing the page. Between 861-1010px there's
+   room for a normal desktop-width single-column layout everywhere else,
+   just not for this specific horizontal nav, so it alone falls back to
+   the mobile dropdown pattern a bit earlier. Keep assets/js/main.js's
+   MOBILE_NAV_BREAKPOINT in sync with this value. */
+@media (max-width:1220px){
+  .menu-toggle{display:flex;}
+  body.nav-open{overflow:hidden;}
+
+  .nav-backdrop{
+    position:fixed;inset:0;
+    background:rgba(6,7,9,0.55);
+    opacity:0;visibility:hidden;
+    transition:opacity .25s ease, visibility .25s ease;
+    z-index:45;
+  }
+  .nav-backdrop.open{opacity:1;visibility:visible;}
+
+  .nav-panel{
+    position:absolute;top:calc(100% + 10px);left:0;right:0;
+    background:var(--card);border:1px solid var(--line);
+    border-radius:18px;box-shadow:0 24px 60px rgba(0,0,0,0.35);
+    padding:8px;
+    display:flex;flex-direction:column;gap:0;
+    max-height:min(560px, calc(100vh - 110px));overflow-y:auto;
+    -webkit-overflow-scrolling:touch;
+    opacity:0;visibility:hidden;pointer-events:none;
+    transform:translateY(-10px) scale(.98);transform-origin:top right;
+    transition:opacity .2s ease, transform .2s ease, visibility .2s ease;
+    z-index:55;
+  }
+  .nav-panel.open{opacity:1;visibility:visible;pointer-events:auto;transform:translateY(0) scale(1);}
+  .nav-panel--static{
+    position:static;max-height:none;overflow:visible;
+    opacity:1;visibility:visible;pointer-events:auto;
+    transform:none;box-shadow:none;border:none;background:transparent;padding:0;
+  }
+
+  .nav-links{flex-direction:column;gap:2px;width:100%;padding:6px;}
+  .nav-links a{
+    display:flex;align-items:center;justify-content:space-between;gap:10px;
+    padding:14px 14px;border-radius:12px;border-bottom:none;
+    font-size:1rem;color:var(--text);white-space:normal;
+  }
+  .nav-links a::after{
+    content:"";width:7px;height:7px;flex:0 0 auto;
+    border-right:2px solid var(--text-dim);border-bottom:2px solid var(--text-dim);
+    transform:rotate(-45deg);opacity:.55;
+  }
+  .nav-links a:hover,.nav-links a:active{background:rgba(var(--accent-rgb),.1);color:var(--text);}
+
+  .nav-cta{flex-wrap:wrap;align-items:center;gap:10px;width:100%;padding:14px 10px 10px;margin-top:4px;border-top:1px solid var(--line);}
+  .nav-cta .lang-select{flex:1 1 auto;}
+  .nav-cta .theme-toggle{flex:0 0 auto;}
+  .nav-cta .btn-primary{flex:0 0 100%;width:100%;justify-content:center;}
+  .nav-cta .btn{white-space:normal;}
+}
+@media (max-width:860px){
+  .split,.partner-band,.footer-top{grid-template-columns:1fr;}
+  .problem-grid,.problem-grid.cols-2,.steps,.models-grid,.spec-grid{grid-template-columns:1fr;}
+  .founder-block{grid-template-columns:1fr;text-align:left;}
+  .partner-band{padding:24px 20px;}
+  section{padding:70px 0;}
+  .process-item{grid-template-columns:44px 1fr;}
+  .consent-inner{flex-direction:column;align-items:stretch;}
+  .consent-inner p{flex:none;}
+  .consent-actions{width:100%;flex-direction:column;}
+  .consent-actions .btn{width:100%;justify-content:center;}
+}
+
+/* ---- B2B overhaul: contact form qualification + founder ops block ---- */
+[hidden]{display:none !important;}
+.form-field input:user-invalid,.form-field select:user-invalid,.form-field textarea:user-invalid{border-color:#b3261e;}
+.form-error{color:#b3261e;font-size:.85rem;font-weight:600;margin-top:12px;}
+.form-radios-wrap{border:none;padding:0;margin:0;min-width:0;}
+.form-radios-wrap legend{font-size:.85rem;font-weight:600;color:var(--text);margin-bottom:8px;padding:0;}
+.form-radios{display:flex;gap:18px;flex-wrap:wrap;font-size:.9rem;color:var(--text);}
+.form-radios label{display:inline-flex;align-items:center;gap:8px;cursor:pointer;}
+.form-radios input{width:auto;margin:0;}
+.founder-ops{margin-top:18px;}
+.founder-ops h4{font-size:.78rem;text-transform:uppercase;letter-spacing:.1em;color:var(--accent);margin-bottom:8px;}
+
+/* ---- B2B overhaul: founding partner, price ranges, specifics, KPI cards ---- */
+.hero-proof a{color:var(--text);font-weight:700;border-bottom:1px solid var(--accent);padding-bottom:1px;}
+.hero-proof a:hover{color:var(--accent);}
+.proof-inner{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;}
+.proof-strip .p-text{font-size:.92rem;color:var(--text);font-weight:600;}
+.proof-strip a{font-size:.85rem;font-weight:700;color:var(--accent);white-space:nowrap;}
+.model-price-teaser{margin:14px 0 0;font-size:.9rem;}
+.model-price-teaser a{font-weight:700;color:var(--accent);}
+.model-price{margin-top:16px;padding-top:14px;border-top:1px dashed var(--line);}
+.model-price b{display:block;font-size:1.3rem;font-weight:900;color:var(--text);}
+.model-price[data-state="pending"] b{display:none;}
+.model-price[data-state="pending"] .model-price-label{font-weight:600;color:var(--accent);}
+.model-price-label{display:block;font-size:.8rem;color:var(--text-dim);}
+.spec-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+.spec-grid h3{font-size:1.05rem;margin-bottom:8px;}
+.spec-grid p{font-size:.94rem;}
+.partner-list{list-style:none;margin:14px 0 18px;padding:0;text-align:left;}
+.partner-list li{font-size:.9rem;color:var(--text);padding-left:18px;position:relative;margin-bottom:8px;line-height:1.45;}
+.partner-list li::before{content:"→";position:absolute;left:0;color:var(--accent);}
+.problem-card h4{font-size:.78rem;text-transform:uppercase;letter-spacing:.1em;color:var(--accent);margin-bottom:6px;font-family:inherit;}
+.problem-card .card-link{display:inline-block;margin-top:10px;font-size:.88rem;font-weight:700;color:var(--accent);}
+
+/* ---- B2B overhaul: one-pager card, hero PDF link, process list inside partner-band ---- */
+.partner-band .process-list li{padding-left:0;}
+.partner-band .process-list li::before{content:none;}
+.hero-links{margin-top:12px;font-size:.88rem;}
+.hero-links a{font-weight:700;color:var(--accent);}
+.onepager-card{max-width:620px;text-align:left;}
+.pdf-links{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0 12px;}
+
+/* Mobile overrides for rules appended below the main 860px block (later
+   rules of equal specificity would otherwise win over the collapse). */
+@media (max-width:860px){
+  .spec-grid,.problem-grid.cols-2{grid-template-columns:1fr;}
+  .spec-grid > *,.problem-grid > *,.models-grid > *{min-width:0;}
+}
+
+/* ---- Universal grid-overflow guard ----
+   CSS Grid items default to min-width:auto, which floors their size at
+   their content's min-content width. If that content (an uppercase,
+   letter-spaced button label especially) is wider in the visitor's actual
+   font than in whatever font this was tuned against, the grid track - and
+   with it the whole page - is forced wider than the viewport. This has
+   already bitten .spec-grid once; rather than patch containers one at a
+   time as each one surfaces on a real device, every grid container on the
+   site gets min-width:0 on its direct children, and long button/heading
+   text is allowed to break instead of forcing width. */
+.problem-grid > *,.steps > *,.models-grid > *,.spec-grid > *,
+.partner-band > *,.form-grid > *,.contact-channels > *,
+.hero-stats > *,.faq-list > *{min-width:0;}
+.btn{white-space:normal;text-align:center;overflow-wrap:break-word;min-width:0;}
+h1,h2,h3{-webkit-hyphens:auto;-ms-hyphens:auto;hyphens:auto;overflow-wrap:break-word;}

@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="pageTitle">VITARO — Fitness, Built Into Your Stay</title>
+<meta name="description" content="VITARO designs, equips, and staffs professional fitness studios inside hotels — including an on-site personal trainer employed directly by us. Starting on Fuerteventura.">
+<link rel="canonical" href="https://vitaro-concept.example/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="VITARO">
+<meta property="og:title" content="VITARO — Fitness, Built Into Your Stay">
+<meta property="og:description" content="Hotel fitness studios, designed, equipped and staffed — including an on-site personal trainer employed directly by VITARO.">
+<meta property="og:image" content="https://vitaro-concept.example/assets/media/vitaro-hero-desktop.jpg">
+<meta property="og:url" content="https://vitaro-concept.example/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23f5efe6'/%3E%3Ctext x='50' y='69' font-size='58' font-family='Arial' font-weight='900' fill='%23181410' text-anchor='middle'%3EV%3C/text%3E%3C/svg%3E">
+<script>
+  (function(){
+    try{
+      var stored = localStorage.getItem('vitaro-theme');
+      var theme;
+      if(stored === 'dark' || stored === 'light'){
+        theme = stored;
+      } else {
+        theme = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
+      }
+      document.documentElement.setAttribute('data-theme', theme);
+    }catch(e){}
+  })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css?v=57">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "VITARO",
+  "url": "https://vitaro-concept.example/",
+  "description": "VITARO designs, equips, and staffs professional fitness studios inside hotels, including a directly-employed on-site personal trainer.",
+  "areaServed": "Canary Islands, Spain"
+}
+</script>
+</head>
+<body class="home">
+
+<a class="skip-link" href="#main" data-i18n="a11y.skip">Skip to content</a>
+
+<header>
+  <div class="wrap">
+    <nav>
+      <a class="logo" href="index.html">VITARO</a>
+
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu" aria-expanded="false" onclick="toggleMobileMenu()">
+        <span></span><span></span><span></span>
+      </button>
+
+      <div class="nav-panel" id="navPanel">
+        <div class="nav-links">
+          <a href="leistungen.html" data-i18n="nav.leistungen">Leistungen</a>
+          <a href="index.html#trainers" data-i18n="nav.trainers">Personal Training</a>
+          <a href="index.html#founder" data-i18n="nav.founder">Why VITARO</a>
+          <a href="partnerschaft.html" data-i18n="nav.partnerschaft">For Hotels</a>
+          <a href="kontakt.html" data-i18n="nav.contact">Contact</a>
+        </div>
+        <div class="nav-cta">
+          <select class="lang-select" id="langSelect" aria-label="Language" onchange="applyLang(this.value)">
+            <option value="en">EN</option>
+            <option value="de">DE</option>
+            <option value="es">ES</option>
+          </select>
+          <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle light / dark mode" title="Toggle light / dark mode">
+            <span class="icon-dark">&#9789;</span>
+            <span class="icon-light">&#9788;</span>
+          </button>
+          <a href="kontakt.html" class="btn btn-primary" data-i18n="nav.cta">Partner With Us</a>
+        </div>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<div class="nav-backdrop" id="navBackdrop" onclick="closeMobileMenu()"></div>
+
+<main id="main">
+
+<section class="hero">
+  <div class="hero-bg" id="heroBg" role="img" aria-label="Concept visual: hotel fitness studio — pool view, cardio area, and free-weight zone">
+    <div class="hero-bg-slide active"></div>
+    <div class="hero-bg-slide"></div>
+    <div class="hero-bg-slide"></div>
+    <div class="hero-bg-slide"></div>
+    <div class="hero-bg-slide"></div>
+    <div class="hero-bg-slide"></div>
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="wrap hero-content hero-inner">
+    <span class="eyebrow" data-i18n="hero.eyebrow">Hospitality Fitness, Reimagined</span>
+    <h1 data-i18n="hero.h1">The hotel gym your guests actually want to use.</h1>
+    <p class="lead" data-i18n="hero.lead">VITARO designs, equips, and staffs a proper fitness studio inside your hotel — including an on-site personal trainer who's part of our team, not a seasonal extra.</p>
+    <div class="hero-actions">
+      <a href="kontakt.html#contactForm" data-booking-link class="btn btn-primary" data-i18n="hero.btn1">Book a 20-min feasibility check</a>
+      <a href="partnerschaft.html#models" class="btn btn-ghost" data-i18n="hero.btn2">See models &amp; indicative pricing</a>
+    </div>
+    <p class="hero-proof"><a href="partnerschaft.html#founding" data-i18n="hero.proof">Founding Partner Programme now open — pilot terms for the first hotels on Fuerteventura</a></p>
+    <p class="hero-links"><a href="partnerschaft.html#onepager" data-i18n="hero.pdf">Download the 2-page overview (PDF) →</a></p>
+  </div>
+</section>
+
+<div class="hero-stats-band">
+  <div class="wrap hero-stats">
+    <div class="stat"><b>74%</b><span data-i18n="hero.stat1">of Gen Z travelers have planned a trip around fitness at least once</span></div>
+    <div class="stat"><b>46%</b><span data-i18n="hero.stat4">of millennial travelers work out on every trip or almost every trip</span></div>
+    <div class="stat"><b>1</b><span data-i18n="hero.stat3">on-site personal trainer, included</span></div>
+  </div>
+</div>
+
+<div class="proof-strip">
+  <div class="wrap proof-inner">
+    <span class="p-text" data-i18n="offer.strip.text">Founding Partner Programme: pilot terms for the first hotels on Fuerteventura, no upfront fit-out cost under Revenue Share.</span>
+    <a href="partnerschaft.html#founding" data-i18n="offer.strip.link">See the programme →</a>
+  </div>
+</div>
+
+<section id="problem">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow" data-i18n="problem.eyebrow">The Problem</span>
+      <h2 data-i18n="problem.h2">Most hotel gyms are an afterthought. Guests notice.</h2>
+      <p data-i18n="problem.p">A treadmill, a rack of mismatched dumbbells, and a mirror — for many hotels, that's still the entire fitness offer. The travelers driving tomorrow's bookings expect more.</p>
+    </div>
+    <div class="problem-grid">
+      <div class="problem-card">
+        <b>70%</b>
+        <p data-i18n="problem.card1">of travelers say they'd pay more to stay at a hotel with well-equipped fitness facilities.</p>
+        <span class="source-note" data-i18n="problem.card1.source">Source: aggregated hospitality-industry survey data</span>
+      </div>
+      <div class="problem-card">
+        <b>30%</b>
+        <p data-i18n="problem.card2">of Gen Z travelers always or often plan getaways around opportunities to train.</p>
+        <span class="source-note" data-i18n="problem.card2.source">Source: The Gym Group research</span>
+      </div>
+      <div class="problem-card">
+        <b>$2.1T</b>
+        <p data-i18n="problem.card3">projected size of the global wellness travel market by 2030.</p>
+        <span class="source-note" data-i18n="problem.card3.source">Source: Grand View Research</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="outcomes">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow" data-i18n="kpi.eyebrow">What it does for your numbers</span>
+      <h2 data-i18n="kpi.h2">Built for the operator's KPIs, not just the guest's mood.</h2>
+      <p data-i18n="kpi.p">A studio that guests actually use shows up where you measure: repeat bookings, review scores, segment capture and a new revenue line.</p>
+    </div>
+    <div class="problem-grid cols-2">
+      <div class="problem-card">
+        <h4 data-i18n="kpi.card1.h4">Repeat bookings and reviews</h4>
+        <b>80%</b>
+        <p data-i18n="kpi.card1.p">of guests are more likely to return to hotels offering personalized wellness services such as tailored fitness plans.</p>
+        <span class="source-note" data-i18n="kpi.card1.source">Source: Core Health &amp; Fitness, 2025 Hospitality Trends</span>
+      </div>
+      <div class="problem-card">
+        <h4 data-i18n="kpi.card2.h4">Business and MICE segment</h4>
+        <b>63%</b>
+        <p data-i18n="kpi.card2.p">of business travelers say fitness facilities are a deciding factor when choosing which hotel to book.</p>
+        <span class="source-note" data-i18n="kpi.card2.source">Source: American Express &amp; GBTA, Business Travel Sentiment report</span>
+      </div>
+      <div class="problem-card">
+        <h4 data-i18n="kpi.card3.h4">Ancillary revenue</h4>
+        <p data-i18n="kpi.card3.p">A new line item: personal training sessions and packages, sold and delivered by our on-site trainer — no extra headcount on your payroll.</p>
+        <a href="partnerschaft.html#economics" class="card-link" data-i18n="hotels.econ">See the revenue logic →</a>
+      </div>
+      <div class="problem-card">
+        <h4 data-i18n="kpi.card4.h4">Operations</h4>
+        <p data-i18n="kpi.card4.p">One contract and one accountable operator for design, equipment, staffing and maintenance — the studio stops being a facilities ticket.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="concept">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow" data-i18n="concept.eyebrow">The Solution</span>
+      <h2 data-i18n="concept.h2">One partner. A complete fitness concept for your hotel.</h2>
+      <p data-i18n="concept.p">We don't just sell equipment. We design, build, and run the fitness experience — so your hotel gets a real amenity, not a storage room with weights in it.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="num">01</div>
+        <h3 data-i18n="concept.step1.h3">Design and Fit-Out</h3>
+        <p data-i18n="concept.step1.p">We assess your property and design a fitness studio tailored to your space, guest profile, and brand — sourcing and installing equipment end to end.</p>
+      </div>
+      <div class="step">
+        <div class="num">02</div>
+        <h3 data-i18n="concept.step2.h3">Staff It Right</h3>
+        <p data-i18n="concept.step2.p">A VITARO personal trainer — employed and trained by us — works on-site to guide guests, run sessions, and keep the space feeling alive, not empty.</p>
+      </div>
+      <div class="step">
+        <div class="num">03</div>
+        <h3 data-i18n="concept.step3.h3">Operate and Elevate</h3>
+        <p data-i18n="concept.step3.p">We handle maintenance, programming, and guest engagement, continuously improving the offer as part of your hotel's amenity mix.</p>
+      </div>
+    </div>
+    <p style="margin-top:32px;"><a href="leistungen.html" class="btn btn-ghost" data-i18n="concept.more">See the full concept in detail →</a></p>
+  </div>
+</section>
+
+<section id="trainers">
+  <div class="wrap split">
+    <div class="split-visual" role="img" aria-label="VITARO personal trainer on-site at a hotel fitness studio">
+      <div class="caption" data-i18n="trainers.visualCaption">On-site personal training, every day of the stay</div>
+    </div>
+    <div>
+      <span class="eyebrow" data-i18n="trainers.eyebrow">On-Site Personal Training</span>
+      <h2 data-i18n="trainers.h2">A dedicated trainer, not a seasonal extra.</h2>
+      <p data-i18n="trainers.p">Many hotels already offer light group activities by the pool. VITARO adds something guests have been missing: a qualified personal trainer, employed directly by us and based at the property, who supports serious training, structured programs, and everyday motivation — without a membership card or a trip to the nearest gym.</p>
+      <ul class="checklist">
+        <li data-i18n="trainers.li1">Employed and trained directly by VITARO — consistent quality across every property</li>
+        <li data-i18n="trainers.li2">On-site guidance for guests at every fitness level, from beginners to serious athletes</li>
+        <li data-i18n="trainers.li3">Structured programming that keeps the studio active outside peak hours</li>
+        <li data-i18n="trainers.li4">An amenity your hotel can genuinely market, not just install</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="founder">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow" data-i18n="founder.eyebrow">Why VITARO</span>
+      <h2 data-i18n="founder.h2">Who is behind VITARO — and how your studio is run.</h2>
+    </div>
+    <div class="founder-block">
+      <div class="founder-avatar">L</div>
+      <div>
+        <p data-i18n="founder.p">VITARO was founded by Louis after years of staying in hotels across Europe and seeing the same thing everywhere: fitness treated as an afterthought. VITARO turns that into something a hotel can actually sign: one contract, one accountable operator, no extra headcount for your team.</p>
+        <div class="founder-name">Louis</div>
+        <div class="founder-role" data-i18n="founder.role">Founder, VITARO</div>
+        <div class="founder-ops">
+          <h4 data-i18n="founder.ops.h4">How we operate</h4>
+          <ul class="checklist">
+            <li data-i18n="founder.ops.li1">The on-site trainer is employed, trained and managed by VITARO — not by your HR department</li>
+            <li data-i18n="founder.ops.li2">Liability and insurance responsibilities are fixed in the partnership agreement before launch, not left as fine print</li>
+            <li data-i18n="founder.ops.li3">Monthly usage and activity reporting, so you always know how the studio performs</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="hotels">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow" data-i18n="hotels.eyebrow">Get Started</span>
+      <h2 data-i18n="hotels.h2">Turn dead square metres into a bookable amenity and a new revenue line.</h2>
+      <p data-i18n="icp.p">For resort and vacation hotels, 4–5 star or upscale independent, from single boutique properties to multi-hotel groups — Fuerteventura first, then the Canary Islands.</p>
+    </div>
+
+    <div class="models-title" data-i18n="hotels.models.title">A partnership model that fits your property</div>
+    <div class="models-grid">
+      <div class="model-card">
+        <h3 data-i18n="hotels.models.card1.h3">Full-Service Lease</h3>
+        <p data-i18n="hotels.models.card1.p">A fixed monthly fee covers design, equipment, staffing, and operations — fully managed by us.</p>
+      </div>
+      <div class="model-card">
+        <h3 data-i18n="hotels.models.card2.h3">Revenue Share</h3>
+        <p data-i18n="hotels.models.card2.p">No upfront cost. We share the revenue generated from guest training sessions and packages.</p>
+      </div>
+      <div class="model-card">
+        <h3 data-i18n="hotels.models.card3.h3">Hybrid</h3>
+        <p data-i18n="hotels.models.card3.p">A combination tailored to your investment appetite and guest volume — details discussed together.</p>
+      </div>
+    </div>
+
+    <p class="model-price-teaser"><a href="partnerschaft.html#models" data-i18n="hotels.models.price">Indicative ranges on the partnership page →</a></p>
+
+    <div class="partner-band">
+      <div>
+        <ul>
+          <li data-i18n="hotels.li1">Full design and equipment fit-out, tailored to your property</li>
+          <li data-i18n="hotels.li2">A trained personal trainer, employed directly by VITARO, on-site</li>
+          <li data-i18n="hotels.li3">Ongoing operations, maintenance, and programming — handled for you</li>
+          <li data-i18n="hotels.li4">A guest experience your competitors don't offer</li>
+        </ul>
+        <p style="margin-top:24px;display:flex;gap:14px;flex-wrap:wrap;"><a href="partnerschaft.html" class="btn btn-ghost" data-i18n="hotels.more">See partnership models &amp; FAQ in detail →</a><a href="partnerschaft.html#economics" class="btn btn-ghost" data-i18n="hotels.econ">See the revenue logic →</a></p>
+        <div class="map-consent" id="mapHome" style="margin-top:24px;" data-map-src="https://www.google.com/maps?q=Fuerteventura,+Spain&output=embed" data-map-title="VITARO target region — Fuerteventura">
+          <div class="map-consent-placeholder">
+            <p data-i18n="map.consent.text">Clicking loads a map from Google Maps and transfers data to Google.</p>
+            <button class="btn btn-ghost" onclick="loadMap('mapHome')" data-i18n="map.consent.btn">Load map</button>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="partner-card">
+          <h3 data-i18n="hotels.card.h3">Founding Partner Programme</h3>
+          <p data-i18n="hotels.card.p">A limited number of hotels on Fuerteventura get pilot terms for being first — no upfront fit-out cost under Revenue Share.</p>
+          <ul class="partner-list">
+            <li data-i18n="offer.li1">No upfront fit-out cost under the Revenue Share pilot terms</li>
+            <li data-i18n="offer.li2">A shorter initial term with a clear exit clause, agreed before launch</li>
+            <li data-i18n="offer.li3">A direct line to the founder throughout the pilot — decisions in days, not quarters</li>
+          </ul>
+          <a href="kontakt.html#contactForm" data-booking-link class="btn btn-primary" style="width:100%;justify-content:center;" data-i18n="hotels.card.btn">Book a feasibility check</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="footer-top">
+      <div>
+        <h2 data-i18n="footer.h2">Let's build the studio your guests will talk about.</h2>
+        <p data-i18n="footer.p">Whether you run an independent boutique property or a multi-hotel group, we'd like to hear from you.</p>
+        <div style="margin-top:26px;display:flex;gap:14px;flex-wrap:wrap;">
+          <a href="kontakt.html#contactForm" data-booking-link class="btn btn-primary" data-i18n="footer.btn1">Contact Us</a>
+          <a href="partnerschaft.html#onepager" class="btn btn-ghost" data-i18n="footer.btn2">Request Partner Info</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="footer.col1.h4">Company</h4>
+        <a href="leistungen.html" data-i18n="nav.leistungen">Leistungen</a>
+        <a href="index.html#trainers" data-i18n="nav.trainers">Personal Training</a>
+        <a href="index.html#founder" data-i18n="nav.founder">Why VITARO</a>
+        <a href="partnerschaft.html" data-i18n="nav.partnerschaft">For Hotels</a>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="footer.col2.h4">Get in Touch</h4>
+        <a href="kontakt.html" data-i18n="nav.contact">Contact</a>
+        <a href="partnerschaft.html" data-i18n="footer.link.hotelPartnerships">Hotel Partnerships</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span data-i18n="footer.bottom.tagline">Fitness, built into your stay.</span>
+      <div class="footer-legal">
+        <span data-i18n="footer.bottom.copyright">© 2026 VITARO. Fuerteventura, Canary Islands.</span>
+        <a href="impressum.html" data-i18n="footer.link.impressum">Legal Notice</a>
+        <a href="datenschutz.html" data-i18n="footer.link.privacy">Privacy Policy</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<div class="consent-banner" id="consentBanner">
+  <div class="wrap consent-inner">
+    <p data-i18n="consent.banner.text">This site loads the Google Maps preview only after you click it. No third-party content runs until then.</p>
+    <div class="consent-actions">
+      <a href="datenschutz.html" class="btn btn-ghost" data-i18n="consent.banner.link">Privacy Policy</a>
+      <button class="btn btn-primary" id="consentDismiss" data-i18n="consent.banner.dismiss">Got it</button>
+    </div>
+  </div>
+</div>
+
+<script src="assets/js/main.js?v=13"></script>
+<script src="assets/js/i18n.js?v=9"></script>
+<script src="assets/js/consent.js?v=5"></script>
+</body>
+</html>

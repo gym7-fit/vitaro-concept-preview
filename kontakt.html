@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="pageTitle">Contact — VITARO</title>
+<meta name="description" content="Get in touch about a VITARO hotel partnership — send an inquiry or book a call directly.">
+<link rel="canonical" href="https://vitaro-concept.example/kontakt.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="VITARO">
+<meta property="og:title" content="Contact — VITARO">
+<meta property="og:description" content="Get in touch about a VITARO hotel partnership.">
+<meta property="og:image" content="https://vitaro-concept.example/assets/media/vitaro-hero-desktop.jpg">
+<meta property="og:url" content="https://vitaro-concept.example/kontakt.html">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23f5efe6'/%3E%3Ctext x='50' y='69' font-size='58' font-family='Arial' font-weight='900' fill='%23181410' text-anchor='middle'%3EV%3C/text%3E%3C/svg%3E">
+<script>
+  (function(){
+    try{
+      var stored = localStorage.getItem('vitaro-theme');
+      var theme;
+      if(stored === 'dark' || stored === 'light'){ theme = stored; }
+      else { theme = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light'; }
+      document.documentElement.setAttribute('data-theme', theme);
+    }catch(e){}
+  })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css?v=57">
+</head>
+<body data-title-key="kt.meta.title">
+
+<a class="skip-link" href="#main" data-i18n="a11y.skip">Skip to content</a>
+
+<header>
+  <div class="wrap">
+    <nav>
+      <a class="logo" href="index.html">VITARO</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu" aria-expanded="false" onclick="toggleMobileMenu()">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-panel" id="navPanel">
+        <div class="nav-links">
+          <a href="leistungen.html" data-i18n="nav.leistungen">Leistungen</a>
+          <a href="index.html#trainers" data-i18n="nav.trainers">Personal Training</a>
+          <a href="index.html#founder" data-i18n="nav.founder">Why VITARO</a>
+          <a href="partnerschaft.html" data-i18n="nav.partnerschaft">For Hotels</a>
+          <a href="kontakt.html" class="active" data-i18n="nav.contact">Contact</a>
+        </div>
+        <div class="nav-cta">
+          <select class="lang-select" id="langSelect" aria-label="Language" onchange="applyLang(this.value)">
+            <option value="en">EN</option><option value="de">DE</option><option value="es">ES</option>
+          </select>
+          <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle light / dark mode" title="Toggle light / dark mode">
+            <span class="icon-dark">&#9789;</span><span class="icon-light">&#9788;</span>
+          </button>
+          <a href="kontakt.html" class="btn btn-primary" data-i18n="nav.cta">Partner With Us</a>
+        </div>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<div class="nav-backdrop" id="navBackdrop" onclick="closeMobileMenu()"></div>
+
+<main id="main">
+
+<section class="hero hero-sm">
+  <div class="wrap hero-content hero-inner">
+    <span class="eyebrow" data-i18n="kt.hero.eyebrow">Get in Touch</span>
+    <h1 data-i18n="kt.hero.h1">Let's talk about your property.</h1>
+    <p class="lead" data-i18n="kt.hero.lead">Send us a few details and we'll get back to you — or book a call directly if you'd rather skip the back-and-forth.</p>
+  </div>
+</section>
+
+<section class="section-tight">
+  <div class="wrap">
+    <div class="contact-channels">
+      <div class="channel-card">
+        <h3 data-i18n="kt.ch1.h3">Email</h3>
+        <p data-i18n="kt.ch1.p">For general questions or if you'd rather not use the form.</p>
+        <a id="contactEmailLink" class="btn btn-ghost" href="#" data-contact-email hidden></a>
+        <p class="source-note" id="contactEmailPending" data-i18n="kt.ch1.pending">Our email address goes live with the mailbox — until then, please use the form or book a slot.</p>
+      </div>
+      <div class="channel-card" id="booking">
+        <h3 data-i18n="kt.ch2.h3">20-minute feasibility check</h3>
+        <p data-i18n="kt.ch2.p">Pick a slot online — or request a call-back in the form and we'll propose times.</p>
+        <a id="bookingBtn" href="kontakt.html#contactForm" data-booking-link class="btn btn-ghost" data-i18n="kt.ch2.btn">Pick a slot</a>
+      </div>
+    </div>
+
+    <div class="form-success" id="formSuccess" style="display:none;">
+      <h2 data-i18n="kt.success.h2" tabindex="-1">Thank you — message received.</h2>
+      <p data-i18n="kt.success.p">We'll get back to you shortly. If it's urgent, feel free to email us directly.</p>
+    </div>
+    <div id="contactFormWrap">
+      <h2 data-i18n="kt.form.h2" style="margin-bottom:28px;">Request a feasibility check</h2>
+      <form id="contactForm" method="POST">
+        <input type="hidden" name="_subject" value="VITARO — hotel inquiry">
+        <input type="hidden" name="page_lang" id="formPageLang" value="en">
+        <p class="hp-field">
+          <label>Don't fill this out if you're human: <input name="_gotcha" tabindex="-1" autocomplete="off"></label>
+        </p>
+        <div class="form-grid">
+          <div class="form-field">
+            <label for="hotel" data-i18n="kt.form.hotel">Hotel / Property Name</label>
+            <input type="text" id="hotel" name="hotel" required autocomplete="organization">
+          </div>
+          <div class="form-field">
+            <label for="contactName" data-i18n="kt.form.contact">Your Name</label>
+            <input type="text" id="contactName" name="contact_name" required autocomplete="name">
+          </div>
+          <div class="form-field">
+            <label for="role" data-i18n="kt.form.role">Your Role</label>
+            <select id="role" name="role" required>
+              <option value="" disabled selected data-i18n="kt.form.select">Please choose</option>
+              <option value="general_manager" data-i18n="kt.form.role.gm">General Manager / Director</option>
+              <option value="owner" data-i18n="kt.form.role.owner">Owner / Investor</option>
+              <option value="asset_manager" data-i18n="kt.form.role.asset">Asset / Operations Manager</option>
+              <option value="leisure_spa" data-i18n="kt.form.role.leisure">Leisure, Spa or F&amp;B Manager</option>
+              <option value="other" data-i18n="kt.form.role.other">Other</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label for="email" data-i18n="kt.form.email">Email</label>
+            <input type="email" id="email" name="email" required autocomplete="email">
+          </div>
+          <div class="form-field">
+            <label for="phone" data-i18n="kt.form.phone">Phone (optional)</label>
+            <input type="tel" id="phone" name="phone" autocomplete="tel">
+          </div>
+          <div class="form-field">
+            <label for="rooms" data-i18n="kt.form.rooms">Number of Rooms</label>
+            <input type="number" id="rooms" name="rooms" min="1" required inputmode="numeric">
+          </div>
+          <div class="form-field">
+            <label for="propertyType" data-i18n="kt.form.type">Property Type</label>
+            <select id="propertyType" name="property_type">
+              <option value="" disabled selected data-i18n="kt.form.select">Please choose</option>
+              <option value="resort" data-i18n="kt.form.type.resort">Resort / vacation hotel</option>
+              <option value="city" data-i18n="kt.form.type.city">City hotel</option>
+              <option value="boutique" data-i18n="kt.form.type.boutique">Boutique / independent</option>
+              <option value="aparthotel" data-i18n="kt.form.type.apart">Aparthotel / serviced apartments</option>
+              <option value="group" data-i18n="kt.form.type.group">Hotel group / multiple properties</option>
+              <option value="other" data-i18n="kt.form.type.other">Other</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label for="category" data-i18n="kt.form.cat">Category</label>
+            <select id="category" name="category">
+              <option value="" disabled selected data-i18n="kt.form.select">Please choose</option>
+              <option value="3" data-i18n="kt.form.cat.3">3 stars</option>
+              <option value="4" data-i18n="kt.form.cat.4">4 stars</option>
+              <option value="5" data-i18n="kt.form.cat.5">5 stars</option>
+              <option value="unrated" data-i18n="kt.form.cat.na">Unrated / other</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label for="location" data-i18n="kt.form.location">Location</label>
+            <span class="hint" data-i18n="kt.form.location.hint">Island or region, country</span>
+            <input type="text" id="location" name="location" required>
+          </div>
+          <div class="form-field">
+            <label for="timeline" data-i18n="kt.form.timeline">Timeline</label>
+            <select id="timeline" name="timeline" required>
+              <option value="" disabled selected data-i18n="kt.form.select">Please choose</option>
+              <option value="lt3m" data-i18n="kt.form.timeline.lt3">Within 3 months</option>
+              <option value="3_6m" data-i18n="kt.form.timeline.3to6">3–6 months</option>
+              <option value="6_12m" data-i18n="kt.form.timeline.6to12">6–12 months</option>
+              <option value="exploring" data-i18n="kt.form.timeline.explore">Just exploring</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label for="modelInterest" data-i18n="kt.form.model">Partnership model of interest</label>
+            <select id="modelInterest" name="model_interest">
+              <option value="" disabled selected data-i18n="kt.form.select">Please choose</option>
+              <option value="lease" data-i18n="kt.form.model.lease">Full-Service Lease</option>
+              <option value="revshare" data-i18n="kt.form.model.rev">Revenue Share</option>
+              <option value="hybrid" data-i18n="kt.form.model.hybrid">Hybrid</option>
+              <option value="unsure" data-i18n="kt.form.model.unsure">Not sure yet</option>
+            </select>
+          </div>
+          <fieldset class="form-field full form-radios-wrap">
+            <legend data-i18n="kt.form.pref">Preferred way to continue</legend>
+            <div class="form-radios">
+              <label><input type="radio" name="preferred_contact" value="email" checked> <span data-i18n="kt.form.pref.email">Reply by email</span></label>
+              <label><input type="radio" name="preferred_contact" value="call"> <span data-i18n="kt.form.pref.call">Call me back</span></label>
+            </div>
+          </fieldset>
+          <div class="form-field full">
+            <label for="message" data-i18n="kt.form.message">Anything else? (optional)</label>
+            <span class="hint" data-i18n="kt.form.message.hint">Current fitness offer, available space, questions — whatever's useful.</span>
+            <textarea id="message" name="message"></textarea>
+          </div>
+        </div>
+        <label class="form-consent">
+          <input type="checkbox" id="formConsent" name="consent" required>
+          <span><span data-i18n="kt.form.consent">I agree that VITARO may store and use my details to respond to this inquiry, in line with the</span> <a href="datenschutz.html" data-i18n="kt.form.consent.link">Privacy Policy</a>.</span>
+        </label>
+        <button type="submit" class="btn btn-primary" id="formSubmit" data-i18n="kt.form.submit">Send Inquiry</button>
+        <p class="form-error" id="formError" hidden data-i18n="kt.form.error">Sending failed. Please try again in a moment or use the email address above.</p>
+        <p class="form-note" data-i18n="kt.form.note">Submitted securely via Formspree, which processes the form on our behalf. We use your data only to respond to your inquiry — see our Privacy Policy.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer id="contact-footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div>
+        <h2 data-i18n="footer.h2">Let's build the studio your guests will talk about.</h2>
+        <p data-i18n="footer.p">Whether you run an independent boutique property or a multi-hotel group, we'd like to hear from you.</p>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="footer.col1.h4">Company</h4>
+        <a href="leistungen.html" data-i18n="nav.leistungen">Leistungen</a>
+        <a href="index.html#trainers" data-i18n="nav.trainers">Personal Training</a>
+        <a href="index.html#founder" data-i18n="nav.founder">Why VITARO</a>
+        <a href="partnerschaft.html" data-i18n="nav.partnerschaft">For Hotels</a>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="footer.col2.h4">Get in Touch</h4>
+        <a href="kontakt.html" data-i18n="nav.contact">Contact</a>
+        <a href="partnerschaft.html" data-i18n="footer.link.hotelPartnerships">Hotel Partnerships</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span data-i18n="footer.bottom.tagline">Fitness, built into your stay.</span>
+      <div class="footer-legal">
+        <span data-i18n="footer.bottom.copyright">© 2026 VITARO. Fuerteventura, Canary Islands.</span>
+        <a href="impressum.html" data-i18n="footer.link.impressum">Legal Notice</a>
+        <a href="datenschutz.html" data-i18n="footer.link.privacy">Privacy Policy</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<div class="consent-banner" id="consentBanner">
+  <div class="wrap consent-inner">
+    <p data-i18n="consent.banner.text">This site loads the Google Maps preview only after you click it. No third-party content runs until then.</p>
+    <div class="consent-actions">
+      <a href="datenschutz.html" class="btn btn-ghost" data-i18n="consent.banner.link">Privacy Policy</a>
+      <button class="btn btn-primary" id="consentDismiss" data-i18n="consent.banner.dismiss">Got it</button>
+    </div>
+  </div>
+</div>
+
+<script src="assets/js/main.js?v=13"></script>
+<script src="assets/js/i18n.js?v=9"></script>
+<script src="assets/js/consent.js?v=5"></script>
+<script>
+  if(location.search.indexOf('submitted=true') !== -1){
+    var wrap = document.getElementById('contactFormWrap');
+    var success = document.getElementById('formSuccess');
+    if(wrap) wrap.style.display = 'none';
+    if(success) success.style.display = 'block';
+  }
+</script>
+</body>
+</html>
