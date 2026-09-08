@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="de" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>VITARO — Interner Planer</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23f5efe6'/%3E%3Ctext x='50' y='69' font-size='58' font-family='Arial' font-weight='900' fill='%23181410' text-anchor='middle'%3EV%3C/text%3E%3C/svg%3E">
+<script>
+  (function(){
+    try{
+      var stored = localStorage.getItem('vitaro-theme');
+      var theme;
+      if(stored === 'dark' || stored === 'light'){ theme = stored; }
+      else { theme = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light'; }
+      document.documentElement.setAttribute('data-theme', theme);
+    }catch(e){}
+  })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css?v=62">
+<link rel="stylesheet" href="../assets/css/planer.css?v=3">
+</head>
+<body class="planer-body">
+
+<div id="gate" class="gate">
+  <div class="gate-card">
+    <div class="gate-logo">VITARO</div>
+    <p class="gate-hint" data-t="gate.hint">Interner Bereich — bitte Zugangscode eingeben.</p>
+    <input type="password" id="gateInput" autocomplete="off" spellcheck="false">
+    <button type="button" id="gateBtn" class="btn btn-primary" data-t="gate.btn">Freischalten</button>
+    <p class="gate-note" data-t="gate.note">Hinweis: Dies ist kein echter Schutz, sondern nur ein Klick-Hindernis gegen versehentliches Aufrufen. Der Link selbst ist nirgends verlinkt.</p>
+  </div>
+</div>
+
+<div id="app" class="planer-app" hidden>
+
+  <header class="planer-header">
+    <div class="wrap planer-header-inner">
+      <div class="logo">VITARO</div>
+      <div class="planer-header-right">
+        <span class="eyebrow" data-t="header.eyebrow">Interner Planer — nicht öffentlich</span>
+        <select class="lang-select" id="planerLangSelect" aria-label="Sprache / Language">
+          <option value="de">DE</option><option value="en">EN</option>
+        </select>
+        <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle light / dark mode" title="Toggle light / dark mode">
+          <span class="icon-dark">&#9789;</span><span class="icon-light">&#9788;</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="wrap planer-tabs-wrap">
+    <div class="planer-tabs" role="tablist">
+      <button class="planer-tab active" data-tab="econ" role="tab" aria-selected="true" data-t="tab.econ">Wirtschaftlichkeit</button>
+      <button class="planer-tab" data-tab="room" role="tab" aria-selected="false" data-t="tab.room">Raumplanung</button>
+    </div>
+  </div>
+
+  <!-- ============ TAB 1: WIRTSCHAFTLICHKEIT ============ -->
+  <section class="wrap planer-panel" id="panel-econ">
+
+    <div class="planer-grid">
+      <div class="planer-card planer-inputs">
+        <h2 data-t="econ.h2.house">Angaben zum Haus</h2>
+
+        <div class="field-row">
+          <label for="inZimmer" data-t="econ.label.zimmer">Zimmer gesamt</label>
+          <input type="number" id="inZimmer" value="120" min="1" step="1">
+        </div>
+        <div class="field-row">
+          <label for="inAuslastung" data-t="econ.label.auslastung">Auslastung (%)</label>
+          <input type="number" id="inAuslastung" value="75" min="1" max="100" step="1">
+        </div>
+        <div class="field-row">
+          <label for="inGaeste" data-t="econ.label.gaeste">Ø Gäste pro belegtem Zimmer</label>
+          <input type="number" id="inGaeste" value="1.8" min="0.5" max="6" step="0.1">
+        </div>
+        <div class="field-row">
+          <label for="inAufenthalt" data-t="econ.label.aufenthalt">Ø Aufenthaltsdauer (Nächte)</label>
+          <input type="number" id="inAufenthalt" value="7" min="1" max="30" step="1">
+        </div>
+
+        <h2 class="mt" data-t="econ.h2.usage">Nutzung des Studios</h2>
+
+        <div class="field-row">
+          <label for="inBuchungsquote" data-t="econ.label.buchungsquote">Buchungsquote (%)</label>
+          <input type="number" id="inBuchungsquote" value="8" min="0.1" max="100" step="0.1">
+        </div>
+        <div class="field-row">
+          <label for="inSessions" data-t="econ.label.sessions">Ø Sessions je buchendem Gast</label>
+          <input type="number" id="inSessions" value="3" min="0.5" max="20" step="0.5">
+        </div>
+        <div class="field-row">
+          <label for="inPreis" data-t="econ.label.preis">Ø Preis je Session/Paket-Einheit (€)</label>
+          <input type="number" id="inPreis" value="25" min="1" max="500" step="1">
+        </div>
+
+        <h2 class="mt" data-t="econ.h2.model">Partnerschaftsmodell</h2>
+
+        <div class="field-row model-select-row">
+          <label><input type="radio" name="model" value="lease" checked> <span data-t="econ.model.lease">Full-Service-Leasing</span></label>
+          <label><input type="radio" name="model" value="rev"> <span data-t="econ.model.rev">Umsatzbeteiligung</span></label>
+          <label><input type="radio" name="model" value="hybrid"> <span data-t="econ.model.hybrid">Hybridmodell</span></label>
+        </div>
+
+        <div class="field-row" id="rowGebuehr">
+          <label for="inGebuehr" data-t="econ.label.gebuehr">Monatliche Grundgebühr (€)</label>
+          <input type="number" id="inGebuehr" value="2500" min="0" step="50">
+        </div>
+        <div class="field-row" id="rowAnteil" hidden>
+          <label for="inAnteil" data-t="econ.label.anteil">Umsatzanteil Hotel (%)</label>
+          <input type="number" id="inAnteil" value="20" min="0" max="100" step="1">
+        </div>
+
+        <p class="source-note" data-t="econ.note.inputs">Alle Werte sind Annahmen zur Veranschaulichung der Methode und werden im echten Gespräch gemeinsam mit dem Hotel kalibriert. Nichts hier ist ein verbindliches Angebot.</p>
+      </div>
+
+      <div class="planer-card planer-results" id="resultsCard">
+        <h2 data-t="econ.h2.result">Ergebnis (indikativ)</h2>
+
+        <div class="result-chain">
+          <div class="result-step">
+            <span class="result-label" data-t="econ.result.gaesteTag.label">Gäste im Haus pro Tag</span>
+            <span class="result-value" id="outGaesteTag">—</span>
+            <span class="result-formula" data-t="econ.result.gaesteTag.formula">Zimmer × Auslastung × Ø Gäste/Zimmer</span>
+          </div>
+          <div class="result-step">
+            <span class="result-label" data-t="econ.result.ankuenfte.label">Gästeankünfte pro Monat</span>
+            <span class="result-value" id="outAnkuenfte">—</span>
+            <span class="result-formula" data-t="econ.result.ankuenfte.formula">Gäste im Haus × 30 ÷ Aufenthaltsdauer</span>
+          </div>
+          <div class="result-step">
+            <span class="result-label" data-t="econ.result.buchend.label">Buchende Gäste pro Monat</span>
+            <span class="result-value" id="outBuchend">—</span>
+            <span class="result-formula" data-t="econ.result.buchend.formula">Ankünfte × Buchungsquote</span>
+          </div>
+          <div class="result-step">
+            <span class="result-label" data-t="econ.result.sessions.label">Sessions pro Monat</span>
+            <span class="result-value" id="outSessions">—</span>
+            <span class="result-formula" data-t="econ.result.sessions.formula">Buchende Gäste × Ø Sessions</span>
+          </div>
+          <div class="result-step result-step-final">
+            <span class="result-label" data-t="econ.result.umsatz.label">Studioumsatz pro Monat</span>
+            <span class="result-value" id="outUmsatz">—</span>
+            <span class="result-formula" data-t="econ.result.umsatz.formula">Sessions × Ø Preis</span>
+          </div>
+        </div>
+
+        <div class="result-divider"></div>
+
+        <div class="result-headline">
+          <span class="result-headline-label" id="outHotelLabel">Kosten für das Hotel</span>
+          <span class="result-headline-value" id="outHotelWert">—</span>
+        </div>
+        <p class="result-headline-note" id="outHotelNote"></p>
+
+        <div class="planer-actions">
+          <button type="button" class="btn btn-primary" id="downloadEconPdfBtn" data-t="econ.btn.pdf">PDF herunterladen</button>
+          <button type="button" class="btn btn-ghost" onclick="window.print()" data-t="econ.btn.print">Zusammenfassung drucken</button>
+          <a class="btn btn-ghost" href="../assets/downloads/vitaro-machbarkeitscheck-rechner.xlsx" download data-t="econ.btn.excel">Excel-Vorlage laden (Backup)</a>
+        </div>
+
+        <label class="internal-toggle">
+          <span class="switch">
+            <input type="checkbox" id="internalToggle">
+            <span class="switch-track"></span>
+          </span>
+          <span data-t="internal.toggle">Interne Kostenaufstellung</span>
+        </label>
+
+        <div class="planer-card internal-panel" id="internalPanel" hidden>
+          <h2 data-t="internal.h2">Ihre Kosten (nur intern)</h2>
+          <div class="field-row">
+            <label for="inTrainer" data-t="internal.label.trainer">Trainergehalt (€/Monat)</label>
+            <input type="number" id="inTrainer" value="2200" min="0" step="50">
+          </div>
+          <div class="field-row">
+            <label for="inGeraete" data-t="internal.label.geraete">Geräte-Abschreibung (€/Monat)</label>
+            <input type="number" id="inGeraete" value="600" min="0" step="50">
+          </div>
+          <div class="field-row">
+            <label for="inSonstige" data-t="internal.label.sonstige">Sonstige Fixkosten (€/Monat)</label>
+            <input type="number" id="inSonstige" value="300" min="0" step="50">
+          </div>
+          <p class="source-note" data-t="internal.note">Trainergehalt, Geräte-Abschreibung und sonstige Fixkosten (Versicherung, Reisen, Verwaltung). Diese Ansicht erscheint nie im PDF oder Ausdruck.</p>
+
+          <div class="result-divider"></div>
+
+          <div class="result-step">
+            <span class="result-label" data-t="internal.result.gross.label">Ihre Einnahmen (vor Kosten)</span>
+            <span class="result-value" id="outVitaroGross">—</span>
+          </div>
+          <div class="result-step">
+            <span class="result-label" data-t="internal.result.costs.label">Ihre Kosten gesamt</span>
+            <span class="result-value" id="outVitaroCosts">—</span>
+          </div>
+          <div class="result-headline">
+            <span class="result-headline-label" data-t="internal.result.net.label">Ihr Nettoertrag</span>
+            <span class="result-headline-value" id="outVitaroNet">—</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="planer-card print-only" id="printSummary">
+      <div class="print-header">
+        <div class="print-logo">VITARO</div>
+        <div class="print-date"></div>
+      </div>
+      <h1 data-t="print.title">Machbarkeitscheck — indikative Wirtschaftlichkeit</h1>
+      <p class="print-sub" data-t="print.sub">Erstellt gemeinsam im Gespräch. Alle Zahlen sind Annahmen und werden nach der Standortanalyse im schriftlichen Angebot verbindlich festgelegt.</p>
+      <table class="print-table" id="printInputTable"></table>
+      <table class="print-table" id="printResultTable"></table>
+    </div>
+  </section>
+
+  <!-- ============ TAB 2: RAUMPLANUNG ============ -->
+  <section class="wrap planer-panel" id="panel-room" hidden>
+
+    <div class="planer-grid planer-grid-room">
+      <div class="planer-card planer-inputs">
+        <h2 data-t="room.h2.room">Raum</h2>
+        <div class="field-row">
+          <label for="roomWidth" data-t="room.label.width">Breite (m)</label>
+          <input type="number" id="roomWidth" value="8" min="2" max="30" step="0.1">
+        </div>
+        <div class="field-row">
+          <label for="roomDepth" data-t="room.label.depth">Tiefe (m)</label>
+          <input type="number" id="roomDepth" value="6" min="2" max="30" step="0.1">
+        </div>
+
+        <h2 class="mt" data-t="room.h2.niche">Nische / Aussparung (optional)</h2>
+        <div class="field-row">
+          <label><input type="checkbox" id="nicheEnabled"> <span data-t="room.niche.enable">Nische aktivieren</span></label>
+        </div>
+        <div class="field-row"><label for="nicheX" data-t="room.label.posX">Position X (m)</label><input type="number" id="nicheX" value="0" min="0" step="0.1"></div>
+        <div class="field-row"><label for="nicheY" data-t="room.label.posY">Position Y (m)</label><input type="number" id="nicheY" value="0" min="0" step="0.1"></div>
+        <div class="field-row"><label for="nicheW" data-t="room.label.width">Breite (m)</label><input type="number" id="nicheW" value="1.5" min="0.2" step="0.1"></div>
+        <div class="field-row"><label for="nicheH" data-t="room.label.depth">Tiefe (m)</label><input type="number" id="nicheH" value="1.5" min="0.2" step="0.1"></div>
+        <p class="source-note" data-t="room.note.niche">Die Nische wird als Aussparung (z. B. Säule, Vorbau) von der nutzbaren Fläche abgezogen.</p>
+
+        <h2 class="mt" data-t="room.h2.catalog">Geräte-Katalog</h2>
+        <p class="source-note" data-t="room.note.catalog">Ziehen Sie ein Gerät in den Grundriss. Maße sind typische Richtwerte, keine Herstellerangaben.</p>
+        <div class="equipment-palette" id="equipmentPalette"></div>
+
+        <div class="planer-actions mt">
+          <button type="button" class="btn btn-ghost" id="rotateBtn" data-t="room.btn.rotate">Ausgewähltes Gerät drehen (R)</button>
+          <button type="button" class="btn btn-ghost" id="deleteBtn" data-t="room.btn.delete">Ausgewähltes Gerät entfernen (Entf)</button>
+          <button type="button" class="btn btn-ghost" id="clearBtn" data-t="room.btn.clear">Grundriss leeren</button>
+        </div>
+        <div class="planer-actions">
+          <button type="button" class="btn btn-primary" id="saveLayoutBtn" data-t="room.btn.save">Layout speichern (dieser Browser)</button>
+          <button type="button" class="btn btn-ghost" id="loadLayoutBtn" data-t="room.btn.load">Gespeichertes Layout laden</button>
+          <button type="button" class="btn btn-ghost" id="exportPngBtn" data-t="room.btn.exportPng">Als Bild exportieren (PNG)</button>
+        </div>
+        <div class="planer-actions">
+          <button type="button" class="btn btn-primary" id="downloadRoomPdfBtn" data-t="room.btn.pdf">Raumplan als PDF herunterladen</button>
+        </div>
+      </div>
+
+      <div class="planer-card room-canvas-card">
+        <div class="room-canvas-toolbar">
+          <span id="roomAreaInfo">—</span>
+        </div>
+        <div class="room-canvas-wrap">
+          <canvas id="roomCanvas" width="900" height="700"></canvas>
+        </div>
+        <p class="source-note" data-t="room.note.canvas">Raster: 10 cm. Klicken zum Auswählen, ziehen zum Verschieben, R zum Drehen, Entf zum Entfernen.</p>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="../assets/js/planer.js?v=6"></script>
+</body>
+</html>
